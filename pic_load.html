@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	body html img{
+		margin: 0;
+		padding: 0;
+	}
+	body html{
+		height:100%;
+	}
+	.load{
+		position: fixed;
+		top:0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		background-color: #ccc;
+	}
+	.progress{
+		margin-top: 300px;
+		text-align: center;
+		font-size: 30px;
+	}
+	.pic_box{
+		width:800px;
+		margin:100px auto;
+	}
+	.pic_box img{
+		width:400px;
+		height:300px;
+	}
+	</style>
+</head>
+<body>
+	<!-- <div class="load"><p class="progress">0%</p></div> -->
+	<div class="pic_box">
+		
+	</div>	
+</body>
+<!-- <script src="jquery-1.7.2/jquery.min.js"></script>
+<script src="preload.js"></script> -->
+<script>
+	var imgs= ['http://img-download.pchome.net/download/1k1/js/5c/oot65l-mi2.jpg',
+	'http://img-download.pchome.net/download/1k1/js/5c/oot65m-150q.jpg',
+	'http://img-download.pchome.net/download/1k1/js/5c/oot65m-huf.jpg',
+	'http://img-download.pchome.net/download/1k1/js/5c/oot65m-1ux8.jpg',
+	'http://img-download.pchome.net/download/1k1/js/5c/oot65n-11xx.jpg',
+	'http://img-download.pchome.net/download/1k1/js/5c/oot65n-1dey.jpg'
+	]
+
+	var picbox=document.querySelector('.pic_box');
+	picbox.style.display='none';
+	var len =imgs.length;
+	var count=0;
+	load();
+	function load(){
+		var imgObj = new Image();
+		if(count<len){
+			imgObj.src=imgs[count];
+		}else{
+			picbox.style.display='block';
+		}
+		imgObj.onload=function(){
+			if(count<len){
+				picbox.appendChild(imgObj);
+				count++;
+				load();
+			}
+		}
+	}
+	
+
+	/*function(){ //无序加载
+		var count = 0;
+		$.each(imgs,function(i,src){
+			
+			if(typeof src != 'string') return;
+
+			var imgObj = new Image();
+
+			$(imgObj).on('load error',function(){
+				opts.each && opts.each(count);
+				if(count >= len - 1){
+					opts.all && opts.all();
+				}
+
+				count++;
+			});
+
+			imgObj.src = src;	
+			
+		})
+	} 	
+
+
+
+	$.preload(imgs,{
+		order:'ordered',
+		each:function(){
+			console.log(count)
+			$('.pic_box').append('<img src="'+imgs[count]+'" alt="">')
+		},
+		all:function(){
+			$('.pic_box').show();
+		}
+	});*/
+</script>
+</html>
